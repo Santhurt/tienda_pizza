@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Los magos de la pizza</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="" href="./css/style.css">
+</head>
+
+<body class="">
+    <header class="bg-primary-s py-3">
+        <div class="container-fluid text-center">
+            <h1>Aqui iria el logo</h1>
+            <img src="..." alt="">
+        </div>
+    </header>
+
+    <!--Barra de navegacion de la pagina-->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-terciary-s py-3">
+        <div class="container-fluid">
+            <!--Boton que aparece cuando la pantalla es pequeña para expandir el contenido-->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!--Secciones de la pagina-->
+
+            <div class="collapse navbar-collapse justify-content-center">
+                <ul class="navbar-nav">
+                    <li class="navbar-item mx-3">
+                        <a class="nav-link" href="#">Inicio</a>
+                    </li>
+
+                    <li class="navbar-item mx-3">
+                        <a class="nav-link" href="#">Menú</a>
+                    </li>
+
+                    <li class="navbar-item mx-3">
+                        <a class="nav-link" href="#">Órdenes</a>
+                    </li>
+
+                    <li class="navbar-item mx-3">
+                        <a class="nav-link" href="#">Contacto</a>
+                    </li>
+
+                    <li class="navbar-item mx-3">
+                        <a href="#" class="btn bg-primary-s px-4 py-2 text-white btn-order">Orderna aquí</a>
+                    </li>
+                </ul>
+
+
+            </div>
+
+            <!--Boton para ordenar el pedido-->
+        </div>
+    </nav>
+
+
+    <section class="container mt-3">
+        <!--Se define el carousel-->
+        <!--Se debe de especificar una id para habilitar animaciones-->
+        <div id="main-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner rounded-4">
+                <!--Se definen los items-->
+                <div class="carousel-item active">
+                    <div class="row bg-secondary-s">
+                        <!--Imagen-->
+                        <div class="col-md-8 p-5 rounded">
+                            <img src="./img/pizza_pepper.png" class="img-fluid" alt="">
+                        </div>
+                        <!--Texto del producto-->
+                        <div class="col-md-4 d-flex align-items-center">
+                            <div class="text-white">
+                                <h1 class="fw-bold">Precio</h1>
+
+                                <h2>Pizza de pepperoni</h2>
+
+                                <button type="button" class="btn bg-primary-s">Solicitar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="row bg-secondary-s">
+                        <!--Imagen-->
+                        <div class="col-md-8 p-5 rounded">
+                            <img src="./img/verduras.png" class="img-fluid" alt="">
+                        </div>
+                        <!--Texto del producto-->
+                        <div class="col-md-4 d-flex align-items-center">
+                            <div class="text-white">
+                                <h1 class="fw-bold">Precio</h1>
+
+                                <h2>Pizza de pepperoni</h2>
+
+                                <button type="button" class="btn bg-primary-s">Solicitar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Controles de navegacion-->
+                <div class="carousel-indicators">
+                    <button type="button" class="active" data-bs-target="#main-carousel" data-bs-slide-to="0"></button>
+                    <button type="button" data-bs-target="#main-carousel" data-bs-slide-to="1"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid mt-4">
+        <div class="row">
+
+            <div class="col-md-8 mb-3">
+                <div class="bg-secondary-s p-4 rounded-4 h-100">
+                    <div class="text-center mb-4">
+                        <img src="./img/postre1.png" alt="Masa" class="img-fluid" style="max-height: 120px;">
+                    </div>
+                    <h3 class="text-center text-white fw-bold">MASA</h3>
+                    <p class="text-center text-white">fresca hecha todos los días</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="bg-primary-s p-4 rounded-4 h-100">
+                    <div class="text-center mb-4">
+                        <img src="path/to/salsa-icon.png" alt="Salsa" class="img-fluid" style="max-height: 120px;">
+                    </div>
+                    <h3 class="text-center text-white fw-bold">SALSA</h3>
+                    <p class="text-center text-white">hecha con tomates maduros de la huerta</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="bg-terciary-s py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center text-dark">
+                    <!-- Contenido del footer -->
+                    <p>© 2025 Little Caesars. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
