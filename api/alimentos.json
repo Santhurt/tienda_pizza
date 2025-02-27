@@ -1,5 +1,5 @@
 {
-    "pizza": [
+    "pizzas": [
         {
             "nombre": "Pizza de Pepperoni",
             "precio": 35000,
@@ -9,7 +9,7 @@
         {
             "nombre": "Pizza de Champiñones",
             "precio": 40000,
-            "imagen": "../img/champiñones.png"
+            "imagen": "../img/champi.png"
         },
 
         {
@@ -91,7 +91,7 @@
     ]
 
     
-},
+}
 
 
 
