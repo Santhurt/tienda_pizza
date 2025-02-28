@@ -26,20 +26,51 @@ export const dom = {
         };
     },
 
-    createImageContainer: (imgSrc, precio, nombre) => {
-        const colContainer = document.createElement("div");
-        colContainer.classList.add("col-md-6", "mb-3");
-
-        const container = document.createElement("div");
-        container.classList.add("bg-secondary-s", "p-4", "rounded-4", "h-100");
-
-        const imgContainer = document.createElement("div");
-        imgContainer.classList.add("text-center", "mb-4");
-
+    createComponent: (imgSrc, nombre, precio) => {
         const img = document.createElement("img");
         img.src = imgSrc;
         img.classList.add("img-fluid");
+
+        const h2 = document.createElement("h2");
+        h2.classList.add("text-white", "fw-bold");
+        h2.textContent = precio;
+
+        const h3 = document.createElement("h3");
+        h3.classList.add("text-white");
+        h3.textContent = nombre;
+
+        return {
+            image: img,
+            h2Precio: h2,
+            h3Nombre: h3
+        }
+
     },
+
+    createCard: (imgSrc, nombre, precio) => {
+        const colContainer = document.createElement("div");
+        colContainer.classList.add("col-6", "mt-4");
+
+        const container = document.createElement("div");
+        container.classList.add("bg-secondary-s", "p-4", "rounded-4");
+
+        const rowContainer = document.createElement("div");
+        rowContainer.classList.add("row");
+
+        const img = createImageCard(imgSrc);
+        const text = createTextCard(precio, nombre);
+
+        rowContainer.appendChild(img);
+        rowContainer.appendChild(text);
+
+        container.appendChild(rowContainer);
+
+        colContainer.appendChild(container);
+
+        return colContainer;
+
+    }
+
 };
 
 const createImage = (imgSrc) => {
@@ -96,3 +127,43 @@ const createIndicator = () => {
     itemCount++;
     return btnIndicator;
 };
+
+// SECCCION DE PRODUCTOS
+
+const createImageCard = (imgSrc) => {
+    const imgContainer = document.createElement("div");
+    imgContainer.classList.add("col-8");
+
+    const img = document.createElement("img");
+    img.classList.add("img-fluid");
+    img.src = imgSrc;
+    img.style.width = "100%";  
+
+    imgContainer.appendChild(img);
+
+    return imgContainer;
+}
+
+const createTextCard = (precio, nombre) => {
+    const textContainer = document.createElement("div");
+    textContainer.classList.add("col-4", "text-white");
+
+    const h1 = document.createElement("h1");
+    h1.classList.add("fw-bold");
+    h1.textContent = precio;
+
+
+    const h3 = document.createElement("h3");
+    h3.textContent = nombre;
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.classList.add("btn", "bg-primary-s");
+    button.textContent = "Añadir";
+
+    textContainer.appendChild(h1);
+    textContainer.appendChild(h3);
+    textContainer.appendChild(button);
+
+    return textContainer;
+}
