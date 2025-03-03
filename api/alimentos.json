@@ -14,52 +14,64 @@
 
         {
             "nombre": "Pizza de Verduras",
-            "precio": 40000,
+            "precio": 20000,
             "imagen": "../img/verduras.png"
         },
 
         {
             "nombre": "Pizza Hawaiana",
-            "precio": 40000,
+            "precio": 24000,
             "imagen": "../img/hawaiana.png"
         },
 
         {
             "nombre": "Pizza Napolitana",
-            "precio": 40000,
+            "precio": 32000,
             "imagen": "../img/napolitana.png"
+        },
+
+        {
+            "nombre": "Pizza de pollo",
+            "precio": 25000,
+            "imagen": "../img/pollo.png"
         }
     ],
 
     "postres": [
         {
             "nombre": "Pastel de chocolate",
-            "precio": 15000,
+            "precio": 35000,
             "imagen": "../img/pastel_chocolate.png"
         },
 
         {
             "nombre": "Pastel de arequipe",
-            "precio": 15000,
+            "precio": 25500,
             "imagen": "../img/pastel_arequipe.png"
         },
 
         {
             "nombre": "Cupcake de fresa",
-            "precio": 15000,
+            "precio": 12500,
             "imagen": "../img/cupcake.png"
         },
 
         {
             "nombre": "Brownie",
-            "precio": 15000,
+            "precio": 10000,
             "imagen": "../img/brownie.png"
         },
 
         {
             "nombre": "Postre de tres leches",
-            "precio": 15000,
+            "precio": 20000,
             "imagen": "../img/tres_leches.png"
+        },
+
+        {
+            "nombre": "Postre de chocolate",
+            "precio": 15000,
+            "imagen": "../img/pastel_chocol.png"
         }
     ],
 
@@ -72,19 +84,19 @@
 
         {
             "nombre": "Cocacola",
-            "precio": 5000,
+            "precio": 8000,
             "imagen": "../img/cocacola.png"
         },
 
         {
             "nombre": "Fanta",
-            "precio": 5000,
+            "precio": 5500,
             "imagen": "../img/fanta.png"
         },
 
         {
             "nombre": "Jugo hit",
-            "precio": 5000,
+            "precio": 4500,
             "imagen": "../img/hit_naranja.png"
         }
 

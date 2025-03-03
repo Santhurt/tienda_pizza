@@ -1,23 +1,33 @@
-.bg-primary-s{
-    background-color: #FF5B00;
+:root {
+
+    --primary-color: #FF5B00;
 }
 
-.bg-secondary-s{
+.bg-primary-s {
+    background-color: var(--primary-color);
+}
+
+.bg-secondary-s {
     background-color: #FF9800;
 }
 
-.btn-orange-s{
+.btn-orange-s {
     background-color: #BF360C;
 }
 
-.footer-black{
+.footer-black {
     background-color: #212121;
 }
 
-.bg-terciary-s{
-    background-color: #E0E0E0; 
+.bg-terciary-s {
+    background-color: #E0E0E0;
 }
 
-.images{
+.images {
     height: 500px;
+}
+
+.image-product{
+    width: 350px;
+    height: 350px;
 }

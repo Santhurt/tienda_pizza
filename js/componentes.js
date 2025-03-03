@@ -133,11 +133,11 @@ const createIndicator = () => {
 const createImageCard = (imgSrc) => {
     const imgContainer = document.createElement("div");
     imgContainer.classList.add("col-8");
+    //imgContainer.style.height = "400px";
 
     const img = document.createElement("img");
-    img.classList.add("img-fluid");
+    img.classList.add("img-fluid", "image-product");
     img.src = imgSrc;
-    img.style.width = "100%";  
 
     imgContainer.appendChild(img);
 
