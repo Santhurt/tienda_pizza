@@ -46,7 +46,8 @@ export const dom = {
         }
 
     },
-
+    
+    //Productos la seccion menu
     createCard: (imgSrc, nombre, precio) => {
         const colContainer = document.createElement("div");
         colContainer.classList.add("col-6", "mt-4");
@@ -145,25 +146,32 @@ const createImageCard = (imgSrc) => {
 }
 
 const createTextCard = (precio, nombre) => {
+    const colTxtContainer = document.createElement("div");
+    colTxtContainer.classList.add("col-md-4", "d-flex", "align-items-center");
+
     const textContainer = document.createElement("div");
-    textContainer.classList.add("col-4", "text-white");
+    textContainer.classList.add("text-white");
 
     const h1 = document.createElement("h1");
     h1.classList.add("fw-bold");
     h1.textContent = precio;
 
-
     const h3 = document.createElement("h3");
     h3.textContent = nombre;
 
     const button = document.createElement("button");
-    button.type = "button";
     button.classList.add("btn", "bg-primary-s");
+    button.type = "button";
     button.textContent = "Añadir";
 
-    textContainer.appendChild(h1);
-    textContainer.appendChild(h3);
-    textContainer.appendChild(button);
+    const elements = [h1, h3, button];
 
-    return textContainer;
+    elements.forEach(element => {
+        textContainer.appendChild(element);
+    });
+
+    colTxtContainer.appendChild(textContainer);
+
+    return colTxtContainer;
+
 }
