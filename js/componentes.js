@@ -39,16 +39,19 @@ export const dom = {
         h3.classList.add("text-white");
         h3.textContent = nombre;
 
+        const counter = createCounter();
+
         return {
             image: img,
             h2Precio: h2,
-            h3Nombre: h3
+            h3Nombre: h3,
+            counter: counter
         }
 
     },
-    
+
     //Productos la seccion menu
-    createCard: (imgSrc, nombre, precio) => {
+    createCard: (imgSrc, nombre, precio, idProd) => {
         const colContainer = document.createElement("div");
         colContainer.classList.add("col-6", "mt-4");
 
@@ -59,7 +62,7 @@ export const dom = {
         rowContainer.classList.add("row");
 
         const img = createImageCard(imgSrc);
-        const text = createTextCard(precio, nombre);
+        const text = createTextCard(idProd,precio, nombre);
 
         rowContainer.appendChild(img);
         rowContainer.appendChild(text);
@@ -70,6 +73,33 @@ export const dom = {
 
         return colContainer;
 
+    },
+
+    createListProduct: (nombre, precio, cantidad) => {
+        const li = document.createElement("li");
+        li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+
+        const container = document.createElement("div");
+
+        const h6 = document.createElement("h6");
+        h6.classList.add("mb-0");
+        h6.textContent = nombre;
+
+        const small = document.createElement("small");
+        small.classList.add("text-muted");
+        small.innerHTML = `Cantidad: <span>${cantidad}</span>`;
+
+        const span = document.createElement("span");
+        span.classList.add("text-end");
+        span.textContent = `${precio}`;
+
+        container.appendChild(h6);
+        container.appendChild(small);
+
+        li.appendChild(container);
+        li.appendChild(span);
+
+        return li;
     }
 
 };
@@ -101,14 +131,19 @@ const createText = (precio, nombre) => {
     const h2Element = document.createElement("h2");
     h2Element.textContent = nombre;
 
-    const button = document.createElement("button");
-    button.type = "button";
-    button.classList.add("btn", "bg-primary-s");
-    button.textContent = "Solicitar";
 
-    txtContainer.appendChild(h1Element);
-    txtContainer.appendChild(h2Element);
-    txtContainer.appendChild(button);
+    const counter = createCounter();
+
+    const button = document.createElement("button");
+    button.classList.add("btn", "bg-primary-s", "w-100", "mt-2");
+    button.type = "button";
+    button.textContent = "Añadir";
+
+    const elements = [h1Element, h2Element, counter, button ];
+
+    elements.forEach(element => {
+        txtContainer.appendChild(element);
+    });
 
     colTxtContainer.appendChild(txtContainer);
 
@@ -145,33 +180,85 @@ const createImageCard = (imgSrc) => {
     return imgContainer;
 }
 
-const createTextCard = (precio, nombre) => {
+const createTextCard = (idProd, precio, nombre) => {
     const colTxtContainer = document.createElement("div");
     colTxtContainer.classList.add("col-md-4", "d-flex", "align-items-center");
 
     const textContainer = document.createElement("div");
-    textContainer.classList.add("text-white");
+    textContainer.classList.add("text-white", "parent");
 
     const h1 = document.createElement("h1");
     h1.classList.add("fw-bold");
-    h1.textContent = precio;
+    h1.textContent = "$" + precio;
 
     const h3 = document.createElement("h3");
     h3.textContent = nombre;
 
+    const quantityContainer = createCounter();
+
+    // Mejorar el botón Añadir
     const button = document.createElement("button");
-    button.classList.add("btn", "bg-primary-s");
+    button.classList.add("btn", "bg-primary-s", "w-100", "mt-2", "add-product");
     button.type = "button";
     button.textContent = "Añadir";
+    button.id = idProd;
+    button.setAttribute("data-price", precio);
+    button.setAttribute("data-name", nombre);
 
-    const elements = [h1, h3, button];
+    // Añadir todos los elementos al contenedor principal
+    const elements = [h1, h3, quantityContainer, button];
 
     elements.forEach(element => {
         textContainer.appendChild(element);
     });
 
     colTxtContainer.appendChild(textContainer);
-
     return colTxtContainer;
 
+}
+
+
+const createCounter = () => {
+    // Crear contenedor para el selector de cantidad
+    const quantityContainer = document.createElement("div");
+    quantityContainer.classList.add("d-flex", "align-items-center", "my-2");
+
+    // Botón para decrementar
+    const decrementBtn = document.createElement("button");
+    decrementBtn.classList.add("btn", "btn-sm", "btn-outline-light");
+    decrementBtn.type = "button";
+    decrementBtn.textContent = "-";
+
+    decrementBtn.onclick = function() {
+        const currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    };
+
+    // Input para la cantidad
+    const quantityInput = document.createElement("input");
+    quantityInput.type = "number";
+    quantityInput.classList.add("form-control", "mx-2", "text-center");
+    quantityInput.style.width = "60px";
+    quantityInput.min = "1";
+    quantityInput.value = "1";
+    quantityInput.setAttribute("data-input", "quantity-input")
+
+    // Botón para incrementar
+    const incrementBtn = document.createElement("button");
+    incrementBtn.classList.add("btn", "btn-sm", "btn-outline-light");
+    incrementBtn.type = "button";
+    incrementBtn.textContent = "+";
+
+    incrementBtn.onclick = function() {
+        const currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    };
+
+    quantityContainer.appendChild(decrementBtn);
+    quantityContainer.appendChild(quantityInput);
+    quantityContainer.appendChild(incrementBtn);
+
+    return quantityContainer;
 }

@@ -1,36 +1,42 @@
 {
     "pizzas": [
         {
+            "id": 0,
             "nombre": "Pizza de Pepperoni",
             "precio": 35000,
             "imagen": "../img/pizza_pepper.png"
         },
 
         {
+            "id": 1,
             "nombre": "Pizza de Champiñones",
             "precio": 40000,
             "imagen": "../img/champi.png"
         },
 
         {
+            "id": 2,
             "nombre": "Pizza de Verduras",
             "precio": 20000,
             "imagen": "../img/verduras.png"
         },
 
         {
+            "id": 3,
             "nombre": "Pizza Hawaiana",
             "precio": 24000,
             "imagen": "../img/hawaiana.png"
         },
 
         {
+            "id": 4,
             "nombre": "Pizza Napolitana",
             "precio": 32000,
             "imagen": "../img/napolitana.png"
         },
 
         {
+            "id": 6,
             "nombre": "Pizza de pollo",
             "precio": 25000,
             "imagen": "../img/pollo.png"
@@ -39,36 +45,42 @@
 
     "postres": [
         {
+            "id": 0,
             "nombre": "Pastel de chocolate",
             "precio": 35000,
             "imagen": "../img/pastel_chocolate.png"
         },
 
         {
+            "id": 1,
             "nombre": "Pastel de arequipe",
             "precio": 25500,
             "imagen": "../img/pastel_arequipe.png"
         },
 
         {
+            "id": 2,
             "nombre": "Cupcake de fresa",
             "precio": 12500,
             "imagen": "../img/cupcake.png"
         },
 
         {
+            "id": 3,
             "nombre": "Brownie",
             "precio": 10000,
             "imagen": "../img/brownie.png"
         },
 
         {
+            "id": 4,
             "nombre": "Postre de tres leches",
             "precio": 20000,
             "imagen": "../img/tres_leches.png"
         },
 
         {
+            "id": 5,
             "nombre": "Postre de chocolate",
             "precio": 15000,
             "imagen": "../img/pastel_chocol.png"
@@ -77,24 +89,28 @@
 
     "refrescos": [
         {
+            "id": 0,
             "nombre": "Pepsi",
             "precio": 5000,
             "imagen": "../img/pepsi.png"
         },
 
         {
+            "id": 1,
             "nombre": "Cocacola",
             "precio": 8000,
             "imagen": "../img/cocacola.png"
         },
 
         {
+            "id": 2,
             "nombre": "Fanta",
             "precio": 5500,
             "imagen": "../img/fanta.png"
         },
 
         {
+            "id": 3,
             "nombre": "Jugo hit",
             "precio": 4500,
             "imagen": "../img/hit_naranja.png"

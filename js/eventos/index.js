@@ -28,6 +28,7 @@ export function startIndex() {
         for (let i = 0; i < 2; i++) {
             const elements = dom.createComponent(postres[i].imagen, postres[i].nombre, postres[i].precio);
 
+            txtContainer[i].prepend(elements.counter);
             txtContainer[i].prepend(elements.h3Nombre);
             txtContainer[i].prepend(elements.h2Precio);
             imgContainer[i].prepend(elements.image);

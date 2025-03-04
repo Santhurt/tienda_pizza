@@ -47,12 +47,51 @@
                     </li>
 
                     <li class="navbar-item mx-3">
-                        <a href="#" class="btn bg-primary-s px-4 py-2 text-white btn-order">Orderna aquí</a>
+                        <button type="button" class="btn bg-primary-s text-white fw-bold" data-bs-toggle="modal"
+                            data-bs-target="#modal-total" id="order-button">
+                            Ordena aqui
+                        </button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <div class="modal fade" id="modal-total" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollabe">
+            <div class="modal-content">
+                <div class="modal-header bg-primary-s">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!--Resumen de la compra-->
+                    <div class="card shadow-sm mb-3">
+                        <div class="card-header bg-light">
+                            <h5 class="card-title mb-0">Resumen de compra</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <!-- Lista de productos -->
+                            <ul class="list-group list-group-flush" id="product-list">
+                                <!--Ordenes-->
+
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Total</h5>
+                                <h5 class="mb-0" id="total-price"><!--Total--></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn bg-primary-s text-white"> Realizar compra</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="container-fluid mt-3 pizzas">
         <div class="row px-5 mx-5" id="pizzas-container">
