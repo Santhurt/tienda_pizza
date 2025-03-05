@@ -1,4 +1,3 @@
-// import { startIndex } from "./eventos/index.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const page = window.location.pathname.split("/").pop();

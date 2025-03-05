@@ -2,17 +2,19 @@ import { dom } from "../componentes.js";
 import { data } from "../logica.js";
 
 export function startProducts() {
+    //representas las secciones de los productos
     const pizzasContainer = document.querySelector("#pizzas-container");
     const postresContainer = document.querySelector("#postres-container");
     const refrescosContainer = document.querySelector("#refrescos-container");
+    //el contendor con las ordenes del usuario
     const orderContainer = document.querySelector("#product-list");
     const totalLabel = document.querySelector("#total-price");
-    let total = 0;
 
+    //se llama la funcion para obtener los productos de la api
     data.getProducts().then((products) => {
         const pizzas = products.pizzas;
         const postres = products.postres;
-        const refrescos = products.refrescos; 
+        const refrescos = products.refrescos;
 
         pizzas.forEach((pizza) => {
             const productCard = dom.createCard(
@@ -47,6 +49,9 @@ export function startProducts() {
             refrescosContainer.appendChild(productCard);
         });
 
+
+
+
         return true;
 
     }).then(isContentLoaded => {
@@ -55,10 +60,10 @@ export function startProducts() {
         const addButtons = document.querySelectorAll(".add-product");
         const orderButton = document.querySelector("#order-button");
 
-
         addButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const parent = e.target.closest(".parent");
+                //input es la cantidad seleccionada
                 const input = parent.querySelector('[data-input="quantity-input"]');
                 const cantidad = input.value;
                 const precio = button.getAttribute("data-price");
@@ -71,25 +76,31 @@ export function startProducts() {
                     cantidad: cantidad
                 }
 
+                //se guarda en el local storage
                 data.setOrder(productOrder);
-
             })
         });
 
-        orderButton.addEventListener('click', () => {
+        orderButton.addEventListener("click", () => {
             const keys = Object.keys(localStorage);
+            //se crea un arreglo aue almacenara los items del localStorage
+            const listItems = [];
+            let total = 0;
 
             keys.forEach(key => {
                 const productOrder = JSON.parse(localStorage.getItem(key));
-
-                const li = dom.createListProduct(productOrder.nombre, productOrder.precioTotal, productOrder.cantidad);
-                orderContainer.appendChild(li);
+                listItems.push(dom.createListProduct(productOrder.nombre, productOrder.precioTotal, productOrder.cantidad));
 
                 total += productOrder.precioTotal;
+
             });
 
+            //se remplaza los elementos actuales de la orden por los nuevos
+            orderContainer.replaceChildren(...listItems);
+
             totalLabel.textContent = total;
-        });
+        })
+
     });
 
 }

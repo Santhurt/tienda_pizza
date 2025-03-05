@@ -1,5 +1,3 @@
-let lsItems = 0;
-
 export const data = {
     getProducts: () => fetch("../api/alimentos.json")
         .then((response) => {
@@ -17,6 +15,6 @@ export const data = {
         }),
 
     setOrder: (productOrder) => {
-        localStorage.setItem(`product-order-${lsItems++}`, JSON.stringify(productOrder));
+        localStorage.setItem(`product-order-${localStorage.length}`, JSON.stringify(productOrder));
     }
 };

@@ -49,7 +49,7 @@
 
                     <li class="navbar-item mx-3">
                         <button type="button" class="btn bg-primary-s text-white fw-bold" data-bs-toggle="modal"
-                            data-bs-target="#modal-total">
+                            data-bs-target="#modal-total" id="order-button">
                             Ordena aqui
                         </button>
                     </li>
@@ -81,20 +81,16 @@
                             <!-- Lista de productos -->
                             <ul class="list-group list-group-flush" id="product-list">
                                 <!-- Ejemplo de producto (puedes replicar esto dinámicamente) -->
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h6 class="mb-0">Pizza de Pepperoni</h6>
-                                        <small class="text-muted">Cantidad: <span>2</span></small>
-                                    </div>
-                                    <span class="text-end">$70,000</span>
-                                </li>
+
+                                <!--###-->
+
                                 <!-- Fin ejemplo -->
                             </ul>
                         </div>
                         <div class="card-footer">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">Total</h5>
-                                <h5 class="mb-0" id="total-price">$70,000</h5>
+                                <h5 class="mb-0" id="total-price"></h5>
                             </div>
                         </div>
                     </div>
@@ -134,8 +130,8 @@
                         </div>
 
                         <div class="col d-flex align-items-center">
-                            <div class="txt-cont">
-                                <button type="button" class="btn bg-primary-s w-100 mt-2">Solicitar</button>
+                            <div class="txt-cont parent">
+                                <button type="button" class="btn bg-primary-s mt-2 add-product" id="button">Añadir</button>
                             </div>
                         </div>
 
@@ -152,8 +148,8 @@
                         </div>
 
                         <div class="col d-flex align-items-center">
-                            <div class="txt-cont">
-                                <button type="button" class="btn bg-primary-s w-100 mt-2">Solicitar</button>
+                            <div class="txt-cont parent">
+                                <button type="button" class="btn bg-primary-s mt-2 add-product" id="button">Añadir</button>
                             </div>
                         </div>
 

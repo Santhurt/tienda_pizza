@@ -1,10 +1,19 @@
 let itemCount = 0;
 
 export const dom = {
-    createCarousel: (imgSrc, precio, nombre) => {
+    /**
+    * Crea un item del carousel (index).
+    * @param {string} imgSrc - ruta de la imagen.
+    * @param {string} nombre - nombre del producto.
+    * @param {number} precio - precio del producto.
+    * @param {string} idProd - id del producto.
+    * @returns {object} objeto con el item del carousel y su respectivo contenedor.
+    */
+    createCarousel: (imgSrc, nombre, precio, idProd) => {
         const itemContainer = document.createElement("div");
         itemContainer.classList.add("carousel-item");
 
+        //Al primer item del carousel se le añade la clase active
         if (itemCount == 0) {
             itemContainer.classList.add("active");
         }
@@ -13,7 +22,7 @@ export const dom = {
         rowContainer.classList.add("row", "bg-secondary-s");
 
         const carouselImage = createImage(imgSrc);
-        const carouselText = createText(precio, nombre);
+        const carouselText = createText(nombre, precio, idProd);
 
         rowContainer.appendChild(carouselImage);
         rowContainer.appendChild(carouselText);
@@ -25,6 +34,14 @@ export const dom = {
             carouselIndicator: createIndicator(),
         };
     },
+
+    /**
+    * Crea la imagen y el texto para el resto de las cards en el index.
+    * @param {string} imgSrc - ruta de la imagen.
+    * @param {string} nombre - nombre del producto.
+    * @param {string} precio - precio del producto.
+    * returns {object} objeto con los elementos de la card.
+    */
 
     createComponent: (imgSrc, nombre, precio) => {
         const img = document.createElement("img");
@@ -50,7 +67,11 @@ export const dom = {
 
     },
 
-    //Productos la seccion menu
+    //Productos de la seccion menu
+
+    /**
+    * @returns {object} columna con la card creada para ser añadida en su respectiva seccion.
+    */
     createCard: (imgSrc, nombre, precio, idProd) => {
         const colContainer = document.createElement("div");
         colContainer.classList.add("col-6", "mt-4");
@@ -62,7 +83,7 @@ export const dom = {
         rowContainer.classList.add("row");
 
         const img = createImageCard(imgSrc);
-        const text = createTextCard(idProd,precio, nombre);
+        const text = createTextCard(idProd, precio, nombre);
 
         rowContainer.appendChild(img);
         rowContainer.appendChild(text);
@@ -75,6 +96,10 @@ export const dom = {
 
     },
 
+
+    /**
+    * @returns {object} elemento li para ser añadido al ul padre.
+    */
     createListProduct: (nombre, precio, cantidad) => {
         const li = document.createElement("li");
         li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
@@ -91,7 +116,7 @@ export const dom = {
 
         const span = document.createElement("span");
         span.classList.add("text-end");
-        span.textContent = `${precio}`;
+        span.textContent = `$${precio}`;
 
         container.appendChild(h6);
         container.appendChild(small);
@@ -104,6 +129,10 @@ export const dom = {
 
 };
 
+/**
+    * Funcion que se encarga de crear la imagen del carousel.
+    * @returns {object} columna con la imagen para ser añadida al carousel.
+    */
 const createImage = (imgSrc) => {
     const colImgContainer = document.createElement("div");
     colImgContainer.classList.add("col-md-8", "p-5", "rounded");
@@ -117,12 +146,20 @@ const createImage = (imgSrc) => {
     return colImgContainer;
 };
 
-const createText = (precio, nombre) => {
+/**
+    *
+    * Funcion que se encargar de crear la informacion del producto, 
+    * junto con otros elementos como el boton para añadir 
+    * a la orden o el input para la cantidad del producto.
+    *
+    * @returns {object} columna con la informacion del producto creada.
+    */
+const createText = (nombre, precio, idProd) => {
     const colTxtContainer = document.createElement("div");
     colTxtContainer.classList.add("col-md-4", "d-flex", "align-items-center");
 
     const txtContainer = document.createElement("div");
-    txtContainer.classList.add("text-white");
+    txtContainer.classList.add("text-white", "parent"); //no se si funcionara
 
     const h1Element = document.createElement("h1");
     h1Element.classList.add("fw-bold");
@@ -135,11 +172,15 @@ const createText = (precio, nombre) => {
     const counter = createCounter();
 
     const button = document.createElement("button");
-    button.classList.add("btn", "bg-primary-s", "w-100", "mt-2");
+    button.classList.add("btn", "bg-primary-s", "mt-2", "add-product");
     button.type = "button";
     button.textContent = "Añadir";
+    button.id = idProd;
+    //se añaden estos atributos para luego acceder a ellos al pedir una orden
+    button.setAttribute("data-price", precio);
+    button.setAttribute("data-name", nombre);
 
-    const elements = [h1Element, h2Element, counter, button ];
+    const elements = [h1Element, h2Element, counter, button];
 
     elements.forEach(element => {
         txtContainer.appendChild(element);
@@ -150,6 +191,9 @@ const createText = (precio, nombre) => {
     return colTxtContainer;
 };
 
+/**
+    * @returns {object} indicador para el carousel.
+    */
 const createIndicator = () => {
     const btnIndicator = document.createElement("button");
     btnIndicator.type = "button";
@@ -166,6 +210,9 @@ const createIndicator = () => {
 
 // SECCCION DE PRODUCTOS
 
+/**
+    * @returns {object} columna con la imagen creada.
+    */
 const createImageCard = (imgSrc) => {
     const imgContainer = document.createElement("div");
     imgContainer.classList.add("col-8");
@@ -180,6 +227,10 @@ const createImageCard = (imgSrc) => {
     return imgContainer;
 }
 
+/**
+    * @returns {object} columa con la informacion del producto creada
+    * y otros elementos.
+    */
 const createTextCard = (idProd, precio, nombre) => {
     const colTxtContainer = document.createElement("div");
     colTxtContainer.classList.add("col-md-4", "d-flex", "align-items-center");
@@ -198,10 +249,11 @@ const createTextCard = (idProd, precio, nombre) => {
 
     // Mejorar el botón Añadir
     const button = document.createElement("button");
-    button.classList.add("btn", "bg-primary-s", "w-100", "mt-2", "add-product");
+    button.classList.add("btn", "bg-primary-s", "mt-2", "add-product");
     button.type = "button";
     button.textContent = "Añadir";
     button.id = idProd;
+
     button.setAttribute("data-price", precio);
     button.setAttribute("data-name", nombre);
 
@@ -217,7 +269,9 @@ const createTextCard = (idProd, precio, nombre) => {
 
 }
 
-
+/**
+    * @returns {object} contenedor con el contador para la cantidad del producto.
+    */
 const createCounter = () => {
     // Crear contenedor para el selector de cantidad
     const quantityContainer = document.createElement("div");
