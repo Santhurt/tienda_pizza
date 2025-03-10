@@ -40,13 +40,13 @@ export const dom = {
     * @param {string} imgSrc - ruta de la imagen.
     * @param {string} nombre - nombre del producto.
     * @param {string} precio - precio del producto.
-    * returns {object} objeto con los elementos de la card.
+    * @returns {object} objeto con los elementos de la card.
     */
 
     createComponent: (imgSrc, nombre, precio) => {
         const img = document.createElement("img");
         img.src = imgSrc;
-        img.classList.add("img-fluid");
+        img.classList.add("img-fluid", "image-hover");
 
         const h2 = document.createElement("h2");
         h2.classList.add("text-white", "fw-bold");
@@ -138,7 +138,7 @@ const createImage = (imgSrc) => {
     colImgContainer.classList.add("col-md-8", "p-5", "rounded");
 
     const img = document.createElement("img");
-    img.classList.add("img-fluid", "images");
+    img.classList.add("img-fluid", "images", "image-hover");
     img.src = imgSrc;
 
     colImgContainer.appendChild(img);
@@ -219,7 +219,7 @@ const createImageCard = (imgSrc) => {
     //imgContainer.style.height = "400px";
 
     const img = document.createElement("img");
-    img.classList.add("img-fluid", "image-product");
+    img.classList.add("img-fluid", "image-product", "image-hover");
     img.src = imgSrc;
 
     imgContainer.appendChild(img);
@@ -277,7 +277,7 @@ const createCounter = () => {
     const quantityContainer = document.createElement("div");
     quantityContainer.classList.add("d-flex", "align-items-center", "my-2");
 
-    // Botón para decrementar
+    // Botón para disminuir
     const decrementBtn = document.createElement("button");
     decrementBtn.classList.add("btn", "btn-sm", "btn-outline-light");
     decrementBtn.type = "button";
@@ -292,12 +292,13 @@ const createCounter = () => {
 
     // Input para la cantidad
     const quantityInput = document.createElement("input");
-    quantityInput.type = "number";
+    quantityInput.type = "text";
     quantityInput.classList.add("form-control", "mx-2", "text-center");
     quantityInput.style.width = "60px";
     quantityInput.min = "1";
     quantityInput.value = "1";
     quantityInput.setAttribute("data-input", "quantity-input")
+    quantityInput.readOnly = true;
 
     // Botón para incrementar
     const incrementBtn = document.createElement("button");
