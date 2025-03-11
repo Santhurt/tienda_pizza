@@ -104,6 +104,7 @@ export const dom = {
         const li = document.createElement("li");
         li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
         li.setAttribute("key", key);
+        li.setAttribute("price", precio);
 
         const container = document.createElement("div");
 
@@ -269,8 +270,13 @@ const createTextCard = (idProd, precio, nombre) => {
     const button = document.createElement("button");
     button.classList.add("btn", "bg-primary-s", "mt-2", "add-product");
     button.type = "button";
-    button.textContent = "Añadir";
+    button.textContent = "Añadir al carrito ";
     button.id = idProd;
+
+    const icon = document.createElement("i");
+    icon.classList.add("bi", "bi-cart");
+    button.appendChild(icon);
+
 
     button.setAttribute("data-price", precio);
     button.setAttribute("data-name", nombre);

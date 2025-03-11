@@ -1,6 +1,7 @@
 :root {
 
     --primary-color: #FF5B00;
+    --hoover-color: #ffb13b;
 }
 
 .bg-primary-s {
@@ -44,5 +45,5 @@
 }
 
 .add-product:hover{
-    background-color: #212121;
+    background-color: var(--hoover-color);
 }

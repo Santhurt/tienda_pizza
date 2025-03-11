@@ -1,5 +1,6 @@
 import { dom } from "../componentes.js";
 import { data } from "../logica.js";
+import swal from "../../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 
 export function startIndex() {
     const carousel = document.querySelector("#carousel");
@@ -70,10 +71,14 @@ export function startIndex() {
                     const nombre = button.getAttribute("data-name");
 
                     const localKeys = Object.keys(localStorage);
-                    const isProductAdded = localKeys.some(key => key == e.target.id);
+                    const isProductAdded = localKeys.some(
+                        (key) => key == e.target.id
+                    );
 
                     if (isProductAdded) {
-                        const product = JSON.parse(localStorage.getItem(e.target.id));
+                        const product = JSON.parse(
+                            localStorage.getItem(e.target.id)
+                        );
                         cantidad = product.cantidad + cantidad;
                     }
                     const productOrder = {
@@ -84,6 +89,11 @@ export function startIndex() {
                     };
 
                     data.setOrder(e.target.id, productOrder);
+
+                    swal.fire({
+                        title: "El producto fue añadido al carrito",
+                        icon: "success",
+                    });
                 });
             });
 
@@ -109,15 +119,32 @@ export function startIndex() {
                 orderContainer.replaceChildren(...listItems);
                 totalLabel.textContent = `$${total}`;
 
-                const deleteButtons = document.querySelectorAll(".delete-product");
+                const deleteButtons =
+                    document.querySelectorAll(".delete-product");
 
-                deleteButtons.forEach(button => {
+                deleteButtons.forEach((button) => {
                     button.addEventListener("click", (e) => {
                         const parentLi = e.target.closest("li");
                         parentLi.remove();
 
                         localStorage.removeItem(parentLi.getAttribute("key"));
-                    })
+
+                        let price = parseInt(
+                            totalLabel.textContent.replace("$", "")
+                        );
+
+                        let newPrice = price - parentLi.getAttribute("price");
+                        totalLabel.textContent = `$${newPrice}`;
+                    });
+                });
+
+                const comprarButton = document.querySelector("#comprar");
+
+                comprarButton.addEventListener("click", () => {
+                    swal.fire({
+                        title: "Compra exitosa",
+                        icon: "success",
+                    });
                 });
             });
         });

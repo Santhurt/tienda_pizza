@@ -1,5 +1,6 @@
 import { dom } from "../componentes.js";
 import { data } from "../logica.js";
+import swal from "../../node_modules/sweetalert2/dist/sweetalert2.esm.all.js";
 
 export function startProducts() {
     //representas las secciones de los productos
@@ -10,14 +11,12 @@ export function startProducts() {
     const orderContainer = document.querySelector("#product-list");
     const totalLabel = document.querySelector("#total-price");
 
-
     //se llama la funcion para obtener los productos de la api
     data.getProducts()
         .then((products) => {
             const pizzas = products.pizzas;
             const postres = products.postres;
             const refrescos = products.refrescos;
-
 
             pizzas.forEach((pizza) => {
                 const productCard = dom.createCard(
@@ -60,7 +59,6 @@ export function startProducts() {
             const addButtons = document.querySelectorAll(".add-product");
             const orderButton = document.querySelector("#order-button");
 
-
             addButtons.forEach((button) => {
                 button.addEventListener("click", (e) => {
                     const parent = e.target.closest(".parent");
@@ -74,11 +72,15 @@ export function startProducts() {
                     const nombre = button.getAttribute("data-name");
 
                     const localKeys = Object.keys(localStorage);
-                    const isProductAdded = localKeys.some(key => key == e.target.id);
+                    const isProductAdded = localKeys.some(
+                        (key) => key == e.target.id
+                    );
 
                     if (isProductAdded) {
-                        const product = JSON.parse(localStorage.getItem(e.target.id));
-                        cantidad =  product.cantidad + cantidad;
+                        const product = JSON.parse(
+                            localStorage.getItem(e.target.id)
+                        );
+                        cantidad = product.cantidad + cantidad;
                     }
 
                     const productOrder = {
@@ -90,10 +92,13 @@ export function startProducts() {
 
                     //se guarda en el local storage
                     data.setOrder(e.target.id, productOrder);
+
+                    swal.fire({
+                        title: "El producto fue añadido al carrito",
+                        icon: "success",
+                    });
                 });
             });
-
-
 
             orderButton.addEventListener("click", () => {
                 const keys = Object.keys(localStorage);
@@ -120,20 +125,32 @@ export function startProducts() {
 
                 totalLabel.textContent = `$${total}`;
 
-                const deleteButtons = document.querySelectorAll(".delete-product");
+                const deleteButtons =
+                    document.querySelectorAll(".delete-product");
 
-                deleteButtons.forEach(button => {
+                deleteButtons.forEach((button) => {
                     button.addEventListener("click", (e) => {
                         const parentLi = e.target.closest("li");
                         parentLi.remove();
 
                         localStorage.removeItem(parentLi.getAttribute("key"));
-                    })
+                        let price = parseInt(
+                            totalLabel.textContent.replace("$", "")
+                        );
+
+                        let newPrice = price - parentLi.getAttribute("price");
+                        totalLabel.textContent = `$${newPrice}`;
+                    });
                 });
 
-                //TODO: Actaulizar el precio del label una vez que se elimina el list item x______x
+                const comprarButton = document.querySelector("#comprar");
+
+                comprarButton.addEventListener("click", () => {
+                    swal.fire({
+                        title: "Compra exitosa",
+                        icon: "success",
+                    });
+                });
             });
-
-
         });
 }
