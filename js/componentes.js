@@ -100,9 +100,10 @@ export const dom = {
     /**
     * @returns {object} elemento li para ser añadido al ul padre.
     */
-    createListProduct: (nombre, precio, cantidad) => {
+    createListProduct: (key, nombre, precio, cantidad) => {
         const li = document.createElement("li");
         li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+        li.setAttribute("key", key);
 
         const container = document.createElement("div");
 
@@ -118,11 +119,28 @@ export const dom = {
         span.classList.add("text-end");
         span.textContent = `$${precio}`;
 
+        const anotherContainer = document.createElement("div");
+        anotherContainer.classList.add("d-flex", "align-items-center", "justify-content-evenly")
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.classList.add("btn", "bg-danger", "text-white", "ms-3", "delete-product");
+        deleteButton.id = "hola";
+
+        const icon = document.createElement("i");
+        icon.classList.add("bi", "bi-trash");
+
+
+        deleteButton.appendChild(icon);
+
         container.appendChild(h6);
         container.appendChild(small);
 
+        anotherContainer.appendChild(span);
+        anotherContainer.appendChild(deleteButton);
+
         li.appendChild(container);
-        li.appendChild(span);
+        li.appendChild(anotherContainer);
 
         return li;
     }

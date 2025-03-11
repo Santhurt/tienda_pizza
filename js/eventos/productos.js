@@ -10,12 +10,14 @@ export function startProducts() {
     const orderContainer = document.querySelector("#product-list");
     const totalLabel = document.querySelector("#total-price");
 
+
     //se llama la funcion para obtener los productos de la api
     data.getProducts()
         .then((products) => {
             const pizzas = products.pizzas;
             const postres = products.postres;
             const refrescos = products.refrescos;
+
 
             pizzas.forEach((pizza) => {
                 const productCard = dom.createCard(
@@ -58,6 +60,7 @@ export function startProducts() {
             const addButtons = document.querySelectorAll(".add-product");
             const orderButton = document.querySelector("#order-button");
 
+
             addButtons.forEach((button) => {
                 button.addEventListener("click", (e) => {
                     const parent = e.target.closest(".parent");
@@ -65,9 +68,18 @@ export function startProducts() {
                     const input = parent.querySelector(
                         '[data-input="quantity-input"]'
                     );
-                    const cantidad = input.value;
+
+                    let cantidad = parseInt(input.value);
                     const precio = button.getAttribute("data-price");
                     const nombre = button.getAttribute("data-name");
+
+                    const localKeys = Object.keys(localStorage);
+                    const isProductAdded = localKeys.some(key => key == e.target.id);
+
+                    if (isProductAdded) {
+                        const product = JSON.parse(localStorage.getItem(e.target.id));
+                        cantidad =  product.cantidad + cantidad;
+                    }
 
                     const productOrder = {
                         id: e.target.id,
@@ -77,9 +89,11 @@ export function startProducts() {
                     };
 
                     //se guarda en el local storage
-                    data.setOrder(productOrder);
+                    data.setOrder(e.target.id, productOrder);
                 });
             });
+
+
 
             orderButton.addEventListener("click", () => {
                 const keys = Object.keys(localStorage);
@@ -91,6 +105,7 @@ export function startProducts() {
                     const productOrder = JSON.parse(localStorage.getItem(key));
                     listItems.push(
                         dom.createListProduct(
+                            key,
                             productOrder.nombre,
                             productOrder.precioTotal,
                             productOrder.cantidad
@@ -103,7 +118,22 @@ export function startProducts() {
                 //se remplaza los elementos actuales de la orden por los nuevos
                 orderContainer.replaceChildren(...listItems);
 
-                totalLabel.textContent = total;
+                totalLabel.textContent = `$${total}`;
+
+                const deleteButtons = document.querySelectorAll(".delete-product");
+
+                deleteButtons.forEach(button => {
+                    button.addEventListener("click", (e) => {
+                        const parentLi = e.target.closest("li");
+                        parentLi.remove();
+
+                        localStorage.removeItem(parentLi.getAttribute("key"));
+                    })
+                });
+
+                //TODO: Actaulizar el precio del label una vez que se elimina el list item x______x
             });
+
+
         });
 }

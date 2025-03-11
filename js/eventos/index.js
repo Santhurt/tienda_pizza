@@ -65,10 +65,17 @@ export function startIndex() {
                     const input = parent.querySelector(
                         '[data-input="quantity-input"]'
                     );
-                    const cantidad = input.value;
+                    let cantidad = parseInt(input.value);
                     const precio = button.getAttribute("data-price");
                     const nombre = button.getAttribute("data-name");
 
+                    const localKeys = Object.keys(localStorage);
+                    const isProductAdded = localKeys.some(key => key == e.target.id);
+
+                    if (isProductAdded) {
+                        const product = JSON.parse(localStorage.getItem(e.target.id));
+                        cantidad = product.cantidad + cantidad;
+                    }
                     const productOrder = {
                         id: e.target.id,
                         nombre: nombre,
@@ -76,7 +83,7 @@ export function startIndex() {
                         cantidad: cantidad,
                     };
 
-                    data.setOrder(productOrder);
+                    data.setOrder(e.target.id, productOrder);
                 });
             });
 
@@ -89,6 +96,7 @@ export function startIndex() {
                     const productOrder = JSON.parse(localStorage.getItem(key));
                     listItems.push(
                         dom.createListProduct(
+                            key,
                             productOrder.nombre,
                             productOrder.precioTotal,
                             productOrder.cantidad
@@ -99,7 +107,18 @@ export function startIndex() {
                 });
 
                 orderContainer.replaceChildren(...listItems);
-                totalLabel.textContent = total;
+                totalLabel.textContent = `$${total}`;
+
+                const deleteButtons = document.querySelectorAll(".delete-product");
+
+                deleteButtons.forEach(button => {
+                    button.addEventListener("click", (e) => {
+                        const parentLi = e.target.closest("li");
+                        parentLi.remove();
+
+                        localStorage.removeItem(parentLi.getAttribute("key"));
+                    })
+                });
             });
         });
 }

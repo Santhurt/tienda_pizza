@@ -15,9 +15,9 @@ export const data = {
                 console.log(error);
             }),
 
-    setOrder: (productOrder) => {
+    setOrder: (key, productOrder) => {
         localStorage.setItem(
-            `product-order-${localStorage.length}`,
+            key,
             JSON.stringify(productOrder)
         );
     },
