@@ -60,6 +60,14 @@ export function startIndex() {
             const addButtons = document.querySelectorAll(".add-product");
             const orderButton = document.querySelector("#order-button");
 
+            const modal = document.querySelector("#modal-total");
+
+            modal.addEventListener("show.bs.modal", (e) => {
+                if (Object.keys(localStorage).length == 0) {
+                    e.preventDefault();
+                }
+            })
+
             addButtons.forEach((button) => {
                 button.addEventListener("click", (e) => {
                     const parent = e.target.closest(".parent");
@@ -93,6 +101,9 @@ export function startIndex() {
                     swal.fire({
                         title: "El producto fue añadido al carrito",
                         icon: "success",
+                        customClass: {
+                            confirmButton: "modal-button"
+                        }
                     });
                 });
             });
@@ -101,6 +112,19 @@ export function startIndex() {
                 const keys = Object.keys(localStorage);
                 const listItems = [];
                 let total = 0;
+
+                if (keys.length == 0) {
+                    swal.fire({
+                        text: "No hay productos en el carrito",
+                        icon: "error",
+                        customClass: {
+                            confirmButton: "modal-button"
+                        }
+                        
+                    })
+
+                    return;
+                }
 
                 keys.forEach((key) => {
                     const productOrder = JSON.parse(localStorage.getItem(key));
@@ -144,6 +168,9 @@ export function startIndex() {
                     swal.fire({
                         title: "Compra exitosa",
                         icon: "success",
+                        customClass: {
+                            confirmButton: "modal-button"
+                        }
                     });
                 });
             });

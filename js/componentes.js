@@ -50,10 +50,10 @@ export const dom = {
 
         const h2 = document.createElement("h2");
         h2.classList.add("text-white", "fw-bold");
-        h2.textContent = precio;
+        h2.textContent = `$${precio}`;
 
         const h3 = document.createElement("h3");
-        h3.classList.add("text-white");
+        h3.classList.add("text-dark");
         h3.textContent = nombre;
 
         const counter = createCounter();
@@ -182,19 +182,29 @@ const createText = (nombre, precio, idProd) => {
 
     const h1Element = document.createElement("h1");
     h1Element.classList.add("fw-bold");
-    h1Element.textContent = precio;
+    h1Element.textContent = `$${precio}`;
 
     const h2Element = document.createElement("h2");
+    h2Element.classList.add("text-dark");
     h2Element.textContent = nombre;
 
 
     const counter = createCounter();
 
     const button = document.createElement("button");
-    button.classList.add("btn", "bg-primary-s", "mt-2", "add-product");
+    button.classList.add("btn", "bg-primary-s", "mt-4", "add-product", "d-flex", "align-items-center", "justify-content-center");
     button.type = "button";
-    button.textContent = "Añadir";
     button.id = idProd;
+
+    const textSpan = document.createElement("span");
+    textSpan.textContent = "Añadir";
+
+    const icon = document.createElement("i");
+    icon.classList.add("bi", "bi-cart", "ms-2");
+
+    button.appendChild(textSpan);
+    button.appendChild(icon);
+
     //se añaden estos atributos para luego acceder a ellos al pedir una orden
     button.setAttribute("data-price", precio);
     button.setAttribute("data-name", nombre);
@@ -263,20 +273,23 @@ const createTextCard = (idProd, precio, nombre) => {
 
     const h3 = document.createElement("h3");
     h3.textContent = nombre;
+    h3.classList.add("text-dark");
 
     const quantityContainer = createCounter();
 
-    // Mejorar el botón Añadir
     const button = document.createElement("button");
-    button.classList.add("btn", "bg-primary-s", "mt-2", "add-product");
+    button.classList.add("btn", "bg-primary-s", "mt-4", "add-product", "d-flex", "align-items-center", "justify-content-center");
     button.type = "button";
-    button.textContent = "Añadir al carrito ";
     button.id = idProd;
 
-    const icon = document.createElement("i");
-    icon.classList.add("bi", "bi-cart");
-    button.appendChild(icon);
+    const textSpan = document.createElement("span");
+    textSpan.textContent = "Añadir";
 
+    const icon = document.createElement("i");
+    icon.classList.add("bi", "bi-cart", "ms-2"); // ms-2 para un espaciado más pequeño y controlado
+
+    button.appendChild(textSpan);
+    button.appendChild(icon);
 
     button.setAttribute("data-price", precio);
     button.setAttribute("data-name", nombre);
@@ -299,11 +312,11 @@ const createTextCard = (idProd, precio, nombre) => {
 const createCounter = () => {
     // Crear contenedor para el selector de cantidad
     const quantityContainer = document.createElement("div");
-    quantityContainer.classList.add("d-flex", "align-items-center", "my-2");
+    quantityContainer.classList.add("d-flex", "align-items-center", "my-4", "quantity-container");
 
     // Botón para disminuir
     const decrementBtn = document.createElement("button");
-    decrementBtn.classList.add("btn", "btn-sm", "btn-outline-light");
+    decrementBtn.classList.add("btn", "btn-sm", "btn-outline-light", "decrement-btn");
     decrementBtn.type = "button";
     decrementBtn.textContent = "-";
 
@@ -317,16 +330,16 @@ const createCounter = () => {
     // Input para la cantidad
     const quantityInput = document.createElement("input");
     quantityInput.type = "text";
-    quantityInput.classList.add("form-control", "mx-2", "text-center");
-    quantityInput.style.width = "60px";
+    quantityInput.classList.add("form-control", "mx-2", "text-center", "quantity-input");
     quantityInput.min = "1";
     quantityInput.value = "1";
     quantityInput.setAttribute("data-input", "quantity-input")
     quantityInput.readOnly = true;
+    quantityInput.disabled = true;
 
     // Botón para incrementar
     const incrementBtn = document.createElement("button");
-    incrementBtn.classList.add("btn", "btn-sm", "btn-outline-light");
+    incrementBtn.classList.add("btn", "btn-sm", "btn-outline-light", "increment-btn");
     incrementBtn.type = "button";
     incrementBtn.textContent = "+";
 
